@@ -17,7 +17,9 @@ module.exports = {
             host: "localhost",
             port: 8545,
             network_id: "4", //rinkeby test network
-            gas: 4700000
+            gas: 4700000,
+            gasPrice: 57000000000,
+            from: "0xb4e46f6a5204487162660c0657ae20846f47daf6"
           },
           live: {
             host: "localhost",
