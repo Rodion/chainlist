@@ -1,0 +1,424 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Avenir-Book;\f1\fnil\fcharset0 Menlo-Regular;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 HelveticaNeue;\f5\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red184\green14\blue61;
+\red247\green238\blue241;\red0\green0\blue0;\red255\green255\blue255;\red38\green38\blue38;\red31\green36\blue45;
+\red63\green69\blue80;\red228\green58\blue65;\red239\green240\blue242;\red27\green31\blue34;\red244\green246\blue249;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;\cssrgb\c78039\c14510\c30588;
+\cssrgb\c97647\c94902\c95686;\csgray\c0;\csgray\c100000;\cssrgb\c20000\c20000\c20000;\cssrgb\c16078\c18824\c23137;
+\cssrgb\c31373\c34118\c38824;\cssrgb\c92549\c32157\c32157;\cssrgb\c94902\c95294\c96078;\cssrgb\c14118\c16078\c18039;\cssrgb\c96471\c97255\c98039;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid1\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid101\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16100\viewh12500\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 Ethereum Installation\
+1. Xcode download from App Store.\
+2. Install Xcode\
+3. Quit Xcode\
+4. Open Terminal\
+5. Run \'93xcode-select - - install\'94 comand\
+6. Go to https://brew.sh\
+7. Run: \expnd0\expndtw0\kerning0
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"\
+\kerning1\expnd0\expndtw0 8.   Run \'93brew update\'94\
+9.   Run \'93brew tap ethereum/ethereum\'93\
+10. Run \'93brew install ethereum\'94\
+11. Run \'93brew upgrade ethereum\'94\
+12. In the browser https://truffleframework.com/ganache\
+13. Download and install ganache.\
+14. Run ganache\
+15. Check if node.js & NPM install. Run: \'93node -v\'94 & \'93npm -v\'94\
+16. To remove nom look https://docs.npmjs.com/misc/removing-npm\
+17. Run: \'93brew install node\'94  \
+18. Install Truffle 4 from https://truffleframework.com. Run: \expnd0\expndtw0\kerning0
+npm install -g truffle\
+19. Install Atom from https://github.com/atom/atom\
+20. Open Atom\
+21, Click Atom -> install Shell Commands\
+22. Quit atom.\
+23. On the terminal installAtom plugin for Solidity \'93apm install language-ethereum\'94 \
+\
+Private Node  created instructions.\
+1. Create new folders\
+	mkdir -p ~/ChainSkills/private\
+	cd ~/ChainSkills/private\
+2. Create Genesis Block manualy:	  \
+	Run \cf4 \cb5 puppeth\
+	\cf2 Network name: ChainSkiils\
+	Configure new genesis - 2\
+	Proof of work - 1\
+	0x\
+	Chain Network ID - 4224\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 	Manage existing genesis -2\
+ 	Export genesis configuration - 2\
+	which file to save the genesis into? (default = ChainSkiils.json) - Enter\
+What would you like to do? (default = stats) - chose \'93Exported existing genesis block\'94 and click CTRL-C\
+	ls and check ChainSkiils.json exist\
+	atom ChainSkiils.json\
+3. Create Private Node:\
+	geth --datadir ~/ChainSkills/private init ChainSkiils.json\
+4. Create accounts\
+	geth --datadir . account new\
+	Password pass1234\
+	Repeat 3 times for create another 2 users with same password.\
+	Run \'93geth --datadir . account list\'94 for check accounts.\
+5. Start private node:\
+	atom startnode.sh\
+	Add script and save:\
+	geth --networkid 4224 --mine --minerthreads 1 --datadir "~/ChainSkills/private" --nodiscover --rpc --rpcport "8545" --port "30303" --rpccorsdomain "*" --nat "any" --rpcapi eth,web3,personal,net --unlock 0 --password ~/ChainSkills/private/password.sec --ipcpath "~/Library/Ethereum/geth.ipc"\
+	create file password.sec in private folder and type pass1234\
+	chmod +x startnode.sh	\
+	Run ./startnode.sh\
+\
+Geth JavaScript console\
+1. Open new terminal  for run Geth JavaScript console\
+2. Run \'93geth attach\'94\
+3, Commads: eth.accounts eth.coinbase eth.getBalance(eth.accounts[1]) eth.getBalance(eth.accounts[0])-mining account\
+4. Run web3.fromWei(eth.getBalance(eth.coinbase),"ether")\
+5. Run miner.stop() , miner.start(2) (2-number of threads) for activate/deactivate miner\
+6. Run net\cf8 \cb3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 .version for receive network identifier\
+7. Run \cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 personal.unlockAccount(eth.accounts[1],"pass1234",300) 300-number of seconds.\
+8, Another commands on https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console\
+9. Transaction script (send money): 
+\f1 eth.sendTransaction(\{from: eth.accounts[0], to: eth.accounts[1], value: web3.toWei(10,"ether")\})\
+10 exit\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf9 \cb3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 Troubleshooting your private node\
+https://www.udemy.com/getting-started-with-ethereum-solidity-development/learn/v4/t/lecture/9401376?start=0
+\f0 \cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\
+MetaMask\
+Go to metamask.io in the Google Chrome\
+1. Add metamask to chrome. Password 12345qwert\
+2. Open Ganache.\
+3. Copy private key from first account.\
+4. MetaMask\'97>Main network\'97>custom rpc and type http://localhost:7545. Save\
+5. MetaMask\'97> Accounts icon\'97>Import account. Paste private key.\
+6. Repeat import for another 9 accounts.  \
+7. Export 3 private accounts from ~/ChainSkills/private/keystore \
+FAQ {\field{\*\fldinst{HYPERLINK "https://github.com/MetaMask/faq"}}{\fldrslt https://github.com/MetaMask/faq}}\
+\
+Smart Contract \'93Hello Word\'94 application development.\
+1. 
+\f1\fs22 mkdir -p ~/ChainSkills/Training/Greetings\
+2. cd ~/ChainSkills/Training/Greetings/\
+3. run \'93npm init\'94\
+4. Next\'97>next\'97>\'85.. \
+5. run npm install web3@0.20.6 solc@0.4.24 \
+6. run atom Greetings.sol\
+\
+pragma solidity ^0.4.18;\
+\
+contract Greetings \{\
+  string message;\
+\
+  constructor() public \{\
+    message = "I'm ready!";\
+  \}\
+\
+  function setGreetings(string _message) public \{\
+    message = _message;\
+  \}\
+\
+  function getGreetings() public view returns (string) \{\
+    return message;\
+  \}\
+\}\
+\
+Deployment smart contract without Truffle\
+1. run 
+\f0\fs28 cd 
+\f1\fs22 cd ~/ChainSkills/Training/Greetings/\
+2. Run node console:  node\
+3. Web3=require('web3')\
+4. web3=new Web3(new Web3.providers.HttpProvider("http://localhost:7545\'94))\
+5. web3.eth.accounts\
+6. solc =require('solc')\
+7. sourceCode = fs.readFileSync('Greetings.sol').toString()\
+8. compiledCode = solc.compile(sourceCode)\
+9. contractABI = JSON.parse(compiledCode.contracts[':Greetings'].interface)\
+10. greetingsContract = web3.eth.contract(contractABI)\
+11. byteCode = compiledCode.contracts[':Greetings'].bytecode\
+12. greetingsDeployed=greetingsContract.new(\{data:byteCode,from:web3.eth.accounts[0],gas:4700000\})\
+13. greetingsDeployed.address\
+14. greetingsInstance=greetingsContract.at(greetingsDeployed.address)\
+15. greetingsInstance.getGreetings()\
+16. greetingsInstance.setGreetings("Hello word",\{from:web3.eth.accounts[0]\})\
+17. greetingsInstance.getGreetings()\
+18. .exit\
+\
+\
+Truffle used:\
+1. Create new dir: mkdir -p ~/ChainSkills/Training/GreetingsTruffle \
+2. Go to: cd ~/ChainSkills/Training/GreetingsTruffle \
+3. truffle version\
+4. truffle init\
+5. run atom .\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\CocoaLigature1 {\listtext	
+\f3 \uc0\u8259 
+\f1 	}\CocoaLigature0 6. Create Greeting.sol in contracts folder\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+6. Create new file 2_deploy_contracts.js in the migration folder\
+var Greetings = artifacts.require("./Greetings.sol");\
+\
+module.exports = function(deployer) \{\
+  deployer.deploy(Greetings);\
+\};\
+7. Run truffle develop\
+8. Open new terminal window\
+9.  cd ~/ChainSkills/Training/GreetingsTruffle/\
+10. truffle develop --log\
+11. Return to truffle(develop) terminal\
+12. migrate \'97compile-all \'97reset\
+13. now migrate return network up to date\
+14.  Greetings.address\
+15. web3.eth.accounts\
+16. Greetings.deployed().then(function(instance)\{app=instance;\})\
+https://scotch.io/tutorials/javascript-promises-for-dummies\
+17. run app\
+18. app.setGreetings("Hello word",\{from:web3.eth.accounts[0]\})\
+19. app.getGreetings()\
+20. Change truffle.js in atom\
+module.exports = \{\
+  // See <http://truffleframework.com/docs/advanced/configuration>\
+  // to customize your Truffle configuration!\
+  networks: \{\
+    ganache: \{\
+      host: "localhost",\
+      port: 7545,\
+      network_id: "*"\
+    \}\
+  \}\
+\};\
+21. Run: truffle migrate --compile-all --reset --network ganache\
+22. Run: truffle console --network ganache\
+23. Greetings.address\
+24. Greetings.deployed().then(function(instance)\{app=instance;\})\
+25. app.getGreetings()\
+26. app.setGreetings("Hello word",\{from:web3.eth.accounts[0]\})\
+27. app.getGreetings()\
+28 .exit\
+\
+Blocks and transactions\
+1. Restart ganache app.\
+2. truffle migrate --compile-all --reset --network ganache\
+3. truffle console --network ganache\
+4. To view transaction details  web3.eth.getTransaction(\'93TX HASH from ganache\'94)\
+5. To view block details  web3.eth.getBlock(\'93TX HASH from ganache\'94)\'a0\
+\
+\
+Gas\
+Run Gannash\
+1. cd ~/ChainSkills/Training/GreetingsTruffle/\
+2. truffle migrate --compile-all --reset --network ganache\
+3. truffle console --network ganache\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs28 4. Run 
+\f1\fs22 web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]),"ether").toNumber()\
+5. web3.eth.coinbase equal web3.eth.getBalance(web3.eth.accounts[0]) \
+6. Run un the browser  https://converter.murkin.me\
+7. Greetings.deployed().then(function(instance)\{app=instance;\})\
+8. app.getGreetings()\
+9. app.getGreetings(\{from:web3.eth.accounts[0]\})\
+10. web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]),"ether").toNumber()\
+11. app.setGreetings(\'93Value is changed!\'94,\{from:web3.eth.accounts[1]\})\
+12. Balanse account 1 ia changed: web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]),"ether").toNumber()\
+\
+\
+OpCodes\
+1. Restart ganache app.\
+2. truffle migrate --compile-all --reset --network ganache\
+3. truffle console --network ganache\
+4. Use https://etherscan.io/opcode-tool to decode opcode\
+\
+Send money:\
+1. Restart ganache app.\
+2. truffle migrate --compile-all --reset --network ganache\
+3. truffle console --network ganache\
+
+\f0\fs28 4. 
+\f1\fs22 web3.eth.sendTransaction(\{from: web3.eth.accounts[0], to: web3.eth.accounts[1], value: web3.toWei(5,"ether")\})\
+\
+\
+Section 2\
+\
+Create Web Application:\
+2. mkdir -p ~/ChainSkills/Training/chainlist \
+3. cd chainlist\
+4. Create project: truffle unbox chainskills/chainskills-box \
+5. Open atom .\
+6. Export source code of the project.\
+7. cd ~/ChainSkills/Training/chainlist/\
+8. truffle migrate --reset --network ganache \
+9. truffle console --network ganache\
+10. ChainList.address\
+11. ChainList.deployed().then(function(instance)\{app=instance;\})\
+12. app\
+13. app.sellArticle("iphone7","selling in order to buy iPhone 8",web3.toWei(3,"ether"),\{from: web3.eth.accounts[1]\})\
+\
+Truffle testing:\
+1. truffle test\
+2. \
+\
+Frontend:\
+1. npm install\
+2. npm run dev\
+3. Disable MetaMask on {\field{\*\fldinst{HYPERLINK "chrome://extensions/"}}{\fldrslt chrome://extensions/}}\
+4. \'85\
+5. https://codebeautify.org/hex-string-converter\
+\
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0
+\f3\fs24 \cf9 \cb3 \CocoaLigature1 		\expnd0\expndtw0\kerning0
+npm uninstall -g truffle\cf10 \cb1 \
+\ls2\ilvl0\cf9 \cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+npm install -g truffle@4.0.7\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0
+\f1\fs22 \cf6 \cb7 \kerning1\expnd0\expndtw0 		
+\fs27 \cf11 \cb12 \expnd0\expndtw0\kerning0
+brew install ethereum
+\f2\fs30 \cf9 \cb3 \'a0\
+\pard\tx566\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+Deployement to private network\
+1. cd ~/ChainSkills/private/\
+2. ./startnode.sh \
+3. In new terminal ~/ChainSkills/Training/chainlist/\
+4. npm install\
+5. truffle test\
+6. atom .\
+7. Edit truffle.js\
+8. truffle migrate --compile-all --reset --network chainskills\
+9. truffle console --network chainskills\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+web3.personal.unlockAccount(web3.eth.accounts[1],"pass1234",600) \
+\
+for check errors: debug \'91tx hash\'92\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\fs32 \cf13 \cb3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html\
+\
+\
+\pard\tx566\pardeftab720\partightenfactor0
+
+\f5\b\fs48 \cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 cd ~/ChainSkills/Training/chainlist/\
+npm install\
+truffle test\
+truffle migrate --compile-all --reset --network ganache\
+truffle console --network chainskills\
+npm run dev\
+\
+\
+\
+\
+http://solidity.readthedocs.io/en/latest/contracts.html\
+\
+\
+
+\f1\b0 \
+\pard\tx566\pardeftab720\partightenfactor0
+
+\fs22 Deployment Frontend to GIT\
+cd ~/ChainSkills/Training/chainlist/\
+rm -rf node_modules\
+rm -rf build\
+git init\
+git add .\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+git commit -m "first commit"\
+\pard\pardeftab720\partightenfactor0
+\cf13 \cb14 \expnd0\expndtw0\kerning0
+\CocoaLigature1 git remote add origin git@github.com:Rodion/chainlist.git\
+git push -u origin master\
+\
+Create SSH key and past to git repository:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 ssh-keygen -t rsa -b 4096 -C "rmolchadsky@gmail.com"\
+eval "$(ssh-agent -s)"\
+ssh-add -K ~/.ssh/id_rsa\
+pbcopy < ~/.ssh/id_rsa.pub and past to git repository\
+\
+Create docs/deployfrontend.sh script\
+\pard\tx566\pardeftab720\partightenfactor0
+truffle migrate --compile-all --reset --network ganache\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+ chmod +x docs/deployfrontend.sh \
+./docs/deployfrontend.sh \
+\
+Open {\field{\*\fldinst{HYPERLINK "https://rodion.github.io/chainlist/"}}{\fldrslt https://rodion.github.io/chainlist/}}\
+\
+\
+Deploy backend (Blockchain test network)\
+\pard\tx566\pardeftab720\partightenfactor0
+cd ~/ChainSkills/Training/chainlist/\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+geth --rinkeby \
+Ctrl-C interrupt Imported new state entries  \
+geth --rinkeby account new\
+Password 12341q2w3e4r$R\
+geth --rinkeby account new\
+Password qwert1q2w3e4r$R\
+atom startrinkrby-mac.sh \
+chmod +x startrinkrby-mac.sh \
+./startrinkrby-mac.sh \
+\
+Open new terminal window:\
+geth attach\
+eth.syncing\
+Wait while sync is finished\
+\
+Connect Metamask to Rinkeby test network\
+Import new account from json\
+\
+New tab window open (if need) {\field{\*\fldinst{HYPERLINK "https://github.com/MetaMask/faq"}}{\fldrslt https://github.com/MetaMask/faq}}  
+\f4\fs32 \cf13 \cb3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html
+\f1\fs22 \cf6 \cb7 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\
+Keys: /Users/dev/Library/Ethereum/rinkeby/keystore\
+\
+Minining: {\field{\*\fldinst{HYPERLINK "https://faucet.rinkeby.io/"}}{\fldrslt https://faucet.rinkeby.io/}}\
+Scanning: {\field{\*\fldinst{HYPERLINK "https://rinkeby.etherscan.io/"}}{\fldrslt https://rinkeby.etherscan.io/}}\
+\
+geth attach\
+personal.unlockAccount(eth.accounts[0],"12341q2w3e4r$R",120)\
+personal.unlockAccount(eth.accounts[1],"qwert1q2w3e4r$R",120)\
+\
+Open new terminal\
+\pard\tx566\pardeftab720\partightenfactor0
+cd ~/ChainSkills/Training/chainlist/\
+truffle migrate --compile-all --reset --network rinkeby\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+./docs/deployfrontend.sh\
+\
+Open {\field{\*\fldinst{HYPERLINK "https://rodion.github.io/chainlist/ChainList.json"}}{\fldrslt https://rodion.github.io/chainlist/}}\
+Check: {\field{\*\fldinst{HYPERLINK "https://rodion.github.io/chainlist/ChainList.json"}}{\fldrslt https://rodion.github.io/chainlist/ChainList.json}}\
+\pard\tx566\pardeftab720\partightenfactor0
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+geth removedb\
+\pard\tx566\pardeftab720\partightenfactor0
+geth --rinkeby upgradedb\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+eth.getBalance(eth.coinbase)\
+}
